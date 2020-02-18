@@ -1,0 +1,26 @@
+<!Doctype html>
+<html lang="en">
+<body>
+<h1>Photo Page</h1>
+
+<br/>
+<% @photo_i.each do |photo| %>
+<%= image_tag("/assets/#{photo.file_name}") %>
+<div class="cmt">
+<p><strong>Photo posted on:</strong><%=photo.date_time %></p>
+
+</div>
+<% @comments_all.where("photo_id=?",photo.id).each do |comment| %>
+
+  <div class="cmt">
+    <p> <strong>Comment: </strong><%= comment.comment %></p>
+    <p> <strong>Posted on: </strong><%= comment.created_at %></p>
+    <p> <strong> Posted by : </strong> <%= link_to show_user_name(comment.user_id), user_photos_path(comment.user_id) %></p>
+
+
+  </div>
+<% end %>
+<% end %>
+
+</body>
+</html>
